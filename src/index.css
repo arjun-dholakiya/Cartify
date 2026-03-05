@@ -1,0 +1,418 @@
+@import 'tailwindcss';
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family:
+      'DM Sans',
+      system-ui,
+      -apple-system,
+      sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Syne', system-ui, sans-serif;
+  }
+}
+
+/* ─── Design Tokens ─── */
+:root {
+  /* Primary — Emerald Green */
+  --primary: #059669;
+  --primary-dark: #047857;
+  --primary-light: #d1fae5;
+  --primary-mid: #10b981;
+  --primary-glow: rgba(5, 150, 105, 0.18);
+
+  /* Accent — Warm Amber */
+  --accent: #f59e0b;
+  --accent-dark: #d97706;
+  --accent-light: #fef3c7;
+
+  /* Surfaces */
+  --bg: #f0fdf8;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --border: #e2e8f0;
+  --border-2: #cbd5e1;
+
+  /* Text */
+  --text: #0f172a;
+  --text-2: #475569;
+  --text-3: #94a3b8;
+
+  /* Sidebar — light mode: matches page background */
+  --sidebar-bg: #f0fdf8;
+  --sidebar-border: #e2e8f0;
+  --sidebar-text: #475569;
+  --sidebar-active: #0f172a;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+}
+
+/* ─── Dark Mode Overrides ─── */
+/* Applied when .dark class is toggled on <html> by ThemeContext */
+.dark {
+  /* Surfaces */
+  --bg: #0a0f1a;
+  --surface: #111827;
+  --surface-2: #1a2233;
+  --border: #1e2d3d;
+  --border-2: #2a3d52;
+
+  /* Text */
+  --text: #f1f5f9;
+  --text-2: #94a3b8;
+  --text-3: #4b5e72;
+
+  /* Sidebar remains dark in dark mode */
+  --sidebar-bg: #07111e;
+  --sidebar-border: #1e2d3d;
+  --sidebar-text: #94a3b8;
+  --sidebar-active: #ffffff;
+
+  /* Keep primary/accent exactly as-is — brand colors stay */
+}
+
+/* Dark mode: Navbar glass tint */
+.dark header[class*='fixed'] {
+  background: rgba(10, 15, 26, 0.92) !important;
+}
+
+/* Dark mode: skeleton shimmer */
+.dark .skeleton {
+  background: linear-gradient(90deg, #1a2233 25%, #243040 50%, #1a2233 75%);
+  background-size: 1600px 100%;
+  animation: shimmer 1.6s infinite;
+}
+
+/* Dark mode: hover on sort/filter dropdowns */
+.dark .hover\:bg-gray-50:hover {
+  background-color: #1a2233 !important;
+}
+
+/* Dark mode: card hover */
+.dark .product-card:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* ─── Global Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Dark input placeholder color */
+.dark-input::placeholder {
+  color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Override browser autofill white background on dark inputs */
+.dark-input:-webkit-autofill,
+.dark-input:-webkit-autofill:hover,
+.dark-input:-webkit-autofill:focus,
+.dark-input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px var(--primary-dark-200) inset !important;
+  -webkit-text-fill-color: white;
+  caret-color: white;
+  transition: background-color 5000s ease-in-out 0s;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Scrollbar hide utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@layer utilities {
+  /* ── Sidebar ── */
+  .sidebar-link {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] font-medium transition-all duration-200
+           hover:bg-white/8 cursor-pointer;
+    color: var(--sidebar-text);
+    letter-spacing: 0.01em;
+  }
+  .sidebar-link:hover {
+    color: var(--sidebar-active);
+    background: var(--sidebar-border);
+  }
+  .sidebar-link-active {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13.5px] font-semibold cursor-pointer;
+    background: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--primary-mid) 100%
+    );
+    color: var(--sidebar-active);
+    box-shadow: 0 4px 14px var(--primary-glow);
+  }
+
+  /* ── Cards ── */
+  .card {
+    @apply rounded-2xl p-5;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.04),
+      0 4px 12px rgba(0, 0, 0, 0.04);
+  }
+
+  /* ── Primary Button ── */
+  .btn-primary {
+    @apply text-white text-sm font-semibold px-5 py-2.5 rounded-xl
+           transition-all duration-200 active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed
+           flex items-center justify-center gap-2;
+    background: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--primary-mid) 100%
+    );
+    box-shadow: 0 4px 14px var(--primary-glow);
+  }
+  .btn-primary:hover:not(:disabled) {
+    background: linear-gradient(
+      135deg,
+      var(--primary-dark) 0%,
+      var(--primary) 100%
+    );
+    box-shadow: 0 6px 18px var(--primary-glow);
+    transform: translateY(-1px);
+  }
+
+  /* ── Secondary Button ── */
+  .btn-secondary {
+    @apply text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-200 active:scale-[0.97]
+           flex items-center justify-center gap-2;
+    background: var(--surface);
+    color: var(--text-2);
+    border: 1.5px solid var(--border);
+  }
+  .btn-secondary:hover {
+    background: var(--surface-2);
+    border-color: var(--border-2);
+    color: var(--text);
+  }
+
+  /* ── Input Field ── */
+  .input-field {
+    @apply w-full px-4 py-2.5 text-sm transition-all duration-200
+           placeholder:text-gray-400 outline-none;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text);
+  }
+  .input-field:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-glow);
+  }
+
+  /* ── Product Card ── */
+  .product-card {
+    @apply overflow-hidden transition-all duration-300;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-mid);
+  }
+
+  /* ── Stats Card ── */
+  .stats-card {
+    @apply p-5 flex items-center gap-4;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+
+  /* ── Category Badge ── */
+  .category-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-semibold capitalize
+           cursor-pointer border whitespace-nowrap select-none;
+    background: var(--surface);
+    color: var(--text-2);
+    border-color: var(--border);
+    transition:
+      background 250ms ease-in-out,
+      color 250ms ease-in-out,
+      border-color 250ms ease-in-out,
+      box-shadow 250ms ease-in-out,
+      transform 200ms ease-in-out;
+  }
+  .category-badge:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--primary-light);
+  }
+  .category-badge:active {
+    transform: scale(0.96);
+  }
+  .category-badge-active {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-semibold capitalize
+           cursor-pointer border whitespace-nowrap select-none;
+    background: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--primary-mid) 100%
+    );
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 14px var(--primary-glow);
+    transition:
+      background 250ms ease-in-out,
+      box-shadow 250ms ease-in-out,
+      transform 200ms ease-in-out;
+  }
+  .category-badge-active:active {
+    transform: scale(0.96);
+  }
+}
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in {
+  animation: fadeUp 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fade-in-fast {
+  animation: fadeIn 0.2s ease-out forwards;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.slide-in-left {
+  animation: slideInLeft 0.3s ease-out forwards;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -800px 0;
+  }
+  100% {
+    background-position: 800px 0;
+  }
+}
+.skeleton {
+  background: linear-gradient(90deg, #f0f4f8 25%, #e2e8f0 50%, #f0f4f8 75%);
+  background-size: 1600px 100%;
+  animation: shimmer 1.6s infinite;
+  border-radius: 8px;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 var(--primary-glow);
+  }
+  50% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+}
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spin {
+  animation: spin 0.8s linear infinite;
+}
+
+/* ── Glassmorphism ── */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ── Staggered card animation ── */
+.product-card:nth-child(1) {
+  animation-delay: 0.03s;
+}
+.product-card:nth-child(2) {
+  animation-delay: 0.06s;
+}
+.product-card:nth-child(3) {
+  animation-delay: 0.09s;
+}
+.product-card:nth-child(4) {
+  animation-delay: 0.12s;
+}
+.product-card:nth-child(5) {
+  animation-delay: 0.15s;
+}
+.product-card:nth-child(6) {
+  animation-delay: 0.18s;
+}
+.product-card:nth-child(7) {
+  animation-delay: 0.21s;
+}
+.product-card:nth-child(8) {
+  animation-delay: 0.24s;
+}
