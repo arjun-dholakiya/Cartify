@@ -198,6 +198,7 @@ export default function Register() {
                 />
                 <input
                   id="name"
+                  autoComplete="new-name"
                   placeholder="John Doe"
                   value={form.name}
                   onChange={handleChange}
@@ -235,6 +236,7 @@ export default function Register() {
                 />
                 <input
                   id="email"
+                  autoComplete="new-email"
                   type="email"
                   placeholder="you@example.com"
                   value={form.email}
@@ -273,6 +275,7 @@ export default function Register() {
                 />
                 <input
                   id="password"
+                  autoComplete="new-password"
                   type={showPass ? 'text' : 'password'}
                   placeholder="Min. 6 characters"
                   value={form.password}

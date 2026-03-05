@@ -157,7 +157,7 @@ export default function Login() {
             </div>
           )}
 
-          {/* ── Login Form ── */}
+          {/* Login Form */}
           <form onSubmit={handleSubmit} className="flex flex-col gap-3.5">
             {/* Email Field */}
             <div className="flex flex-col gap-1.5">
@@ -176,6 +176,7 @@ export default function Login() {
                 <input
                   id="email"
                   type="email"
+                  autoComplete="new-email"
                   placeholder="you@example.com"
                   value={form.email}
                   onChange={handleChange}
@@ -219,6 +220,7 @@ export default function Login() {
                   value={form.password}
                   onChange={handleChange}
                   required
+                  autoComplete="new-password"
                   className="w-full pl-9 pr-10 py-2.5 text-sm rounded-xl outline-none transition-all dark-input"
                   style={{
                     background: 'rgba(255,255,255,0.08)',

@@ -219,6 +219,7 @@ export default function Profile() {
               <input
                 id="name"
                 placeholder="John Doe"
+                autoComplete="new-name"
                 value={form.name}
                 onChange={handleChange}
                 required
@@ -253,6 +254,7 @@ export default function Profile() {
                 placeholder="you@example.com"
                 value={form.email}
                 onChange={handleChange}
+                autoComplete="new-email"
                 required
                 className={`input-field ${errors.email ? 'border-red-400' : ''}`}
                 style={{ paddingLeft: '2.5rem' }}
