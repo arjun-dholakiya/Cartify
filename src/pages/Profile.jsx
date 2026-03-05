@@ -283,7 +283,7 @@ export default function Profile() {
                 style={{ color: 'var(--text-3)' }}
               />
               <input
-                autoComplete="off"
+                autoComplete="new-password"
                 id="password"
                 type={showPass ? 'text' : 'password'}
                 placeholder="New password"
