@@ -3,7 +3,7 @@ import { ShoppingCart, CheckCircle, Star, ImageOff } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useToast } from '../../context/ToastContext';
 
-/* ─── Category Emojis Map ── */
+/* Category Emojis Map */
 const CATEGORY_EMOJIS = {
   "men's clothing": '👔',
   "women's clothing": '👗',
@@ -23,11 +23,6 @@ const CATEGORY_SEEDS = {
   'sports & fitness': ['fitness', 'sport', 'gym']
 };
 
-/* ─── Product Image with two-level error fallback ──
-   Level 1: product image URL
-   Level 2: picsum.photos seeded image (always works)
-   Level 3: grey placeholder (practically never shown)
-── */
 function ProductImage({ src, alt, productId, category }) {
   const [stage, setStage] = useState(0); // 0=primary, 1=fallback, 2=error
 
@@ -58,10 +53,6 @@ function ProductImage({ src, alt, productId, category }) {
   );
 }
 
-/* ─── Product Card ─────────────────────────────────────────────
-   Displays a single product with image, rating, price, and
-   an Add to Cart button. Shows a toast notification when added.
-──────────────────────────────────────────────────────────────── */
 export default function ProductCard({ product, index = 0 }) {
   const { addToCart, items } = useCart();
   const { showToast } = useToast();
@@ -106,7 +97,7 @@ export default function ProductCard({ product, index = 0 }) {
         opacity: 0
       }}
     >
-      {/* ── Product Image Area ── */}
+      {/* Product Image Area */}
       <div
         className="relative h-44 sm:h-52 overflow-hidden"
         style={{ background: 'linear-gradient(145deg,#f8fafc,#f1f5f9)' }}
@@ -143,7 +134,7 @@ export default function ProductCard({ product, index = 0 }) {
         </span>
       </div>
 
-      {/* Product Info*/}
+      {/* Product Info */}
       <div className="p-3 sm:p-4 flex flex-col gap-2 flex-1">
         <div className="flex-1">
           <h3
@@ -187,7 +178,7 @@ export default function ProductCard({ product, index = 0 }) {
           </div>
         </div>
 
-        {/* ── Price + Add to Cart ── */}
+        {/* Price + Add to Cart */}
         <div className="flex items-center justify-between gap-2 mt-1">
           <span
             className="text-base sm:text-lg font-bold"

@@ -2,14 +2,6 @@ import { Trash2, Minus, Plus } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useToast } from '../../context/ToastContext';
 
-/* ─── Cart Item ────────────────────────────────────────────────
-   Renders a single item in the shopping cart with:
-   - Product image with fallback
-   - Title + category
-   - Quantity stepper (+ / -)
-   - Subtotal price
-   - Remove button (always visible on mobile, hover on desktop)
-──────────────────────────────────────────────────────────────── */
 export default function CartItem({ item }) {
   const { updateQuantity, removeFromCart } = useCart();
   const { showToast } = useToast();
@@ -28,7 +20,7 @@ export default function CartItem({ item }) {
         border: '1px solid var(--border)'
       }}
     >
-      {/* ── Product Image ── */}
+      {/* Product Image */}
       <div
         className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden shrink-0"
         style={{
@@ -46,7 +38,7 @@ export default function CartItem({ item }) {
         />
       </div>
 
-      {/* ── Item Details ── */}
+      {/* Item Details */}
       <div className="flex-1 min-w-0">
         <h4
           className="text-sm font-semibold line-clamp-2 leading-snug"
@@ -61,7 +53,7 @@ export default function CartItem({ item }) {
           {item.category}
         </p>
 
-        {/* ── Quantity Stepper + Price Row ── */}
+        {/* Quantity Stepper + Price Row */}
         <div className="flex items-center justify-between gap-3 mt-3">
           {/* Quantity stepper */}
           <div

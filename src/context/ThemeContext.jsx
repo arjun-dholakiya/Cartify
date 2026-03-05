@@ -1,10 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 
-/* ─── Theme Context ───────────────────────────────────────────
-   Manages light/dark mode by toggling the `.dark` class on
-   the <html> element. Persists preference to localStorage.
-   The actual CSS variable overrides live in index.css (.dark {})
-──────────────────────────────────────────────────────────────── */
 const ThemeContext = createContext(null);
 
 export function ThemeProvider({ children }) {

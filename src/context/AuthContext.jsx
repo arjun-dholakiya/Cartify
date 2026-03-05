@@ -21,9 +21,6 @@ export function AuthProvider({ children }) {
 
   const [sessionSeconds, setSessionSeconds] = useState(SESSION_DURATION);
 
-  // ---------------------------
-  // SESSION TIMER
-  // ---------------------------
   useEffect(() => {
     if (!user) return;
 
@@ -53,9 +50,6 @@ export function AuthProvider({ children }) {
     return () => clearInterval(timerRef.current);
   }, [user]);
 
-  // ---------------------------
-  // LOGIN
-  // ---------------------------
   const login = useCallback((email, password) => {
     const users = JSON.parse(localStorage.getItem('cartify_users') || '[]');
 
@@ -90,9 +84,6 @@ export function AuthProvider({ children }) {
     return safeUser;
   }, []);
 
-  // ---------------------------
-  // REGISTER
-  // ---------------------------
   const register = useCallback((name, email, password) => {
     const users = JSON.parse(localStorage.getItem('cartify_users') || '[]');
 
@@ -124,9 +115,6 @@ export function AuthProvider({ children }) {
     return safeUser;
   }, []);
 
-  // ---------------------------
-  // LOGOUT
-  // ---------------------------
   const logout = useCallback(() => {
     clearInterval(timerRef.current);
 
@@ -137,9 +125,6 @@ export function AuthProvider({ children }) {
     setSessionSeconds(0);
   }, []);
 
-  // ---------------------------
-  // UPDATE PROFILE
-  // ---------------------------
   const updateProfile = useCallback(
     (updates) => {
       if (!user) return;
@@ -164,9 +149,6 @@ export function AuthProvider({ children }) {
     [user]
   );
 
-  // ---------------------------
-  // FORMAT TIMER
-  // ---------------------------
   const formatTimer = () => {
     const m = Math.floor(sessionSeconds / 60)
       .toString()

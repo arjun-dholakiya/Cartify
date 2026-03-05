@@ -3,10 +3,6 @@ import { Eye, EyeOff, User, Mail, Lock, Camera } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 
-/* ─── Profile Page ─────────────────────────────────────────────
-   Allows the user to update their name, email, password, and
-   profile photo. Shows a toast notification on save.
-──────────────────────────────────────────────────────────────── */
 export default function Profile() {
   const { user, updateProfile } = useAuth();
   const { showToast } = useToast();
@@ -27,7 +23,7 @@ export default function Profile() {
     setErrors((p) => ({ ...p, [e.target.id]: '' }));
   };
 
-  /* ── Photo Upload Handler ── */
+  /* Photo Upload Handler */
   const handlePhotoChange = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -38,7 +34,7 @@ export default function Profile() {
     reader.readAsDataURL(file);
   };
 
-  /* ── Form Validation ── */
+  /* Form Validation */
   const validate = () => {
     const errs = {};
     if (!form.name.trim() || form.name.trim().length < 2)
@@ -50,7 +46,7 @@ export default function Profile() {
     return errs;
   };
 
-  /* ── Form Submit — Save profile and show toast ── */
+  /* Form Submit — Save profile and show toast */
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = validate();
@@ -88,7 +84,7 @@ export default function Profile() {
 
   return (
     <div className="flex flex-col gap-5 fade-in max-w-lg w-full">
-      {/* ── Page Header ── */}
+      {/* Page Header */}
       <div>
         <h1
           className="text-xl sm:text-2xl font-bold"
@@ -101,7 +97,7 @@ export default function Profile() {
         </p>
       </div>
 
-      {/* ── Avatar Card ── */}
+      {/* Avatar Card */}
       <div
         className="rounded-2xl p-4 sm:p-5 flex items-center gap-4"
         style={{
@@ -190,7 +186,7 @@ export default function Profile() {
         </div>
       </div>
 
-      {/* ── Account Settings Form ── */}
+      {/* Account Settings Form */}
       <div
         className="rounded-2xl p-4 sm:p-5"
         style={{

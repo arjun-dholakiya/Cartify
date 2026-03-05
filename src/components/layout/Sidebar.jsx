@@ -12,7 +12,7 @@ import { useCart } from '../../context/CartContext';
 import { useToast } from '../../context/ToastContext';
 import BasketLogo from '../ui/BasketLogo';
 
-/* ─── Navigation Items Definition ── */
+/* Navigation Items Definition */
 const navItems = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/products', label: 'Products', icon: Package },
@@ -20,12 +20,6 @@ const navItems = [
   { to: '/profile', label: 'Profile', icon: User }
 ];
 
-/* ─── Sidebar Inner Content ─────────────────────────────────────
-   Shared between the desktop fixed sidebar and mobile drawer.
-   Uses CSS variables (--sidebar-text, --sidebar-active, --sidebar-bg)
-   so all colors automatically update with light/dark mode.
-   onClose prop is called when nav link is clicked (mobile only).
-────────────────────────────────────────────────────────────────── */
 function SidebarInner({ onClose }) {
   const { user, logout } = useAuth();
   const { cartCount } = useCart();
@@ -50,7 +44,7 @@ function SidebarInner({ onClose }) {
 
   return (
     <div className="flex flex-col h-full py-5 px-3">
-      {/* ── Brand Logo ── */}
+      {/* Brand Logo */}
       <div className="flex items-center gap-3 px-2 mb-8">
         <div
           className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
@@ -92,7 +86,7 @@ function SidebarInner({ onClose }) {
         Navigation
       </p>
 
-      {/* ── Navigation Links ── */}
+      {/* Navigation Links */}
       <nav className="flex flex-col gap-1 flex-1">
         {navItems.map(({ to, label, icon: Icon, badge }) => (
           <NavLink
@@ -120,7 +114,7 @@ function SidebarInner({ onClose }) {
         ))}
       </nav>
 
-      {/* ── User Card + Logout ── */}
+      {/* User Card + Logout */}
       <div
         className="mt-4 pt-4"
         style={{ borderTop: '1px solid var(--sidebar-border)' }}
@@ -185,12 +179,6 @@ function SidebarInner({ onClose }) {
   );
 }
 
-/* ─── Sidebar — Desktop Fixed + Mobile Drawer ──────────────────
-   Desktop: always-visible fixed sidebar (w-60, left-0).
-   Mobile: slide-in drawer with backdrop overlay.
-   background uses var(--sidebar-bg) — white in light, dark navy in dark.
-   A right border (var(--sidebar-border)) visually separates it in light mode.
-────────────────────────────────────────────────────────────────── */
 export default function Sidebar({ isOpen, onClose }) {
   return (
     <>

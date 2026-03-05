@@ -42,13 +42,6 @@ const ICON_PALETTES = [
   '#ea580c' /* orange-600 */
 ];
 
-/* ─── Dashboard Page ───────────────────────────────────────────
-   Main landing page after login. Shows:
-   1. Hero/welcome banner with greeting
-   2. Stats cards (products, cart, value, categories)
-   3. Category quick links grid
-   4. Top-rated featured products
-──────────────────────────────────────────────────────────────── */
 export default function Dashboard() {
   /* Auth context — get current user data */
   const { user } = useAuth();
@@ -60,7 +53,7 @@ export default function Dashboard() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  /* ── API Call: Fetch products on mount ── */
+  /* API Call: Fetch products on mount */
   useEffect(() => {
     fetchProducts()
       .then((data) => {
@@ -82,7 +75,7 @@ export default function Dashboard() {
       .finally(() => setLoading(false));
   }, []);
 
-  /* ── Stats Data ── */
+  /* Stats Data */
   const stats = [
     {
       icon: Package,
@@ -114,7 +107,7 @@ export default function Dashboard() {
     }
   ];
 
-  /* ── Time-based greeting (IST) ── */
+  /* Time-based greeting (IST) */
   const hour = Number(
     new Date().toLocaleString('en-US', {
       timeZone: 'Asia/Kolkata',
@@ -137,7 +130,7 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col gap-5 md:gap-7 fade-in">
-      {/* ── Dashboard Hero Section ── */}
+      {/* Dashboard Hero Section */}
       <div
         className="relative overflow-hidden rounded-2xl md:rounded-3xl px-5 py-7 sm:px-8 sm:py-9 md:px-10 md:py-10"
         style={{
@@ -207,7 +200,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* ── Stats Cards Grid ── */}
+      {/* Stats Cards Grid */}
       {/* 2 columns on mobile, 4 on tablet+ */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
         {stats.map((s) => (
@@ -215,7 +208,7 @@ export default function Dashboard() {
         ))}
       </div>
 
-      {/* ── Category Quick Links ── */}
+      {/* Category Quick Links */}
       {!loading && categories.length > 0 && (
         <div>
           <div className="flex items-center justify-between mb-3">
@@ -278,7 +271,7 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* ── Top Rated Products Section ── */}
+      {/* Top Rated Products Section */}
       <div className="pb-2">
         <div className="flex items-center justify-between mb-3 md:mb-4">
           <div>

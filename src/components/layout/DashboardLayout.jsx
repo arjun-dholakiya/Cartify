@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 
-/* ─── Dashboard Layout ── */
+/* Dashboard Layout */
 export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 

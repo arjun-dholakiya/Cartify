@@ -3,10 +3,6 @@ import { Shield, Truck, RotateCcw, CheckCircle } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useToast } from '../../context/ToastContext';
 
-/* ─── Cart Summary ─────────────────────────────────────────────
-   Sticky sidebar panel showing order total, checkout button,
-   and trust badges. Shows a success toast on order placement.
-──────────────────────────────────────────────────────────────── */
 export default function CartSummary() {
   const { subtotal, items, clearCart } = useCart();
   const { showToast } = useToast();
@@ -77,7 +73,7 @@ export default function CartSummary() {
         Order Summary
       </h3>
 
-      {/* ── Line Items Breakdown ── */}
+      {/* Line Items Breakdown */}
       <div className="flex flex-col gap-2.5 text-sm">
         <div
           className="flex justify-between"
@@ -120,7 +116,7 @@ export default function CartSummary() {
         </div>
       </div>
 
-      {/* ── Checkout Button ── */}
+      {/* Checkout Button */}
       <button
         onClick={handleCheckout}
         disabled={checking}
@@ -136,7 +132,7 @@ export default function CartSummary() {
         )}
       </button>
 
-      {/* ── Trust Badges ── */}
+      {/* Trust Badges */}
       <div className="grid grid-cols-3 gap-2 pt-1">
         {[
           { icon: Shield, label: 'Secure Pay' },

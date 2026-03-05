@@ -16,7 +16,7 @@ import {
 import ProductCard from '../components/products/ProductCard';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 
-/* ─── Constants ── */
+/* Constants */
 const ITEMS_PER_PAGE = 8;
 
 /* Same palette as Dashboard — keeps category colors consistent across pages */
@@ -48,14 +48,6 @@ const CATEGORY_EMOJIS = {
   'sports & fitness': '🏋️'
 };
 
-/* ─── Products Page ────────────────────────────────────────────
-   Full product catalog with:
-   - Search bar with debounce
-   - Sort dropdown
-   - Category filter tabs (horizontal scroll)
-   - Product grid with pagination
-   - Loading skeleton + error + empty states
-──────────────────────────────────────────────────────────────── */
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -69,8 +61,6 @@ export default function Products() {
   const [showSort, setShowSort] = useState(false);
   const sortRef = useRef(null);
 
-  /* ── Click-outside: close sort dropdown reliably on mouse + trackpad ──
-     mousedown fires before click, so the sort option onClick runs first. */
   useEffect(() => {
     if (!showSort) return;
     const handler = (e) => {
@@ -82,7 +72,7 @@ export default function Products() {
     return () => document.removeEventListener('mousedown', handler);
   }, [showSort]);
 
-  /* ── Debounce search input (350ms) ── */
+  /* Debounce search input (350ms) */
   useEffect(() => {
     const t = setTimeout(() => {
       setDebouncedQuery(searchQuery);
@@ -91,7 +81,7 @@ export default function Products() {
     return () => clearTimeout(t);
   }, [searchQuery]);
 
-  /* ── API: Fetch products by category ── */
+  /* API: Fetch products by category */
   const load = useCallback(async (cat) => {
     setLoading(true);
     setError('');
@@ -108,7 +98,7 @@ export default function Products() {
     }
   }, []);
 
-  /* ── API: Fetch categories on mount ── */
+  /* API: Fetch categories on mount */
   useEffect(() => {
     fetchCategories()
       .then((c) => setCategories(['all', ...c]))
@@ -122,7 +112,7 @@ export default function Products() {
     setCurrentPage(1);
   }, [activeCategory]);
 
-  /* ── Filter + Sort Logic ── */
+  /* Filter + Sort Logic */
   const processed = useMemo(() => {
     /* Filter by search query (matches title or category) */
     let result = products.filter(
@@ -148,7 +138,7 @@ export default function Products() {
     return result;
   }, [products, debouncedQuery, sortBy]);
 
-  /* ── Pagination ── */
+  /* Pagination */
   const totalPages = Math.ceil(processed.length / ITEMS_PER_PAGE);
   const paginated = processed.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
@@ -165,7 +155,7 @@ export default function Products() {
 
   return (
     <div className="flex flex-col gap-6 fade-in">
-      {/* ── Page Header ── */}
+      {/* Page Header */}
       <div>
         <h1
           className="text-2xl font-bold"
@@ -179,7 +169,7 @@ export default function Products() {
         </p>
       </div>
 
-      {/* ── Search + Sort Bar ── */}
+      {/* Search + Sort Bar */}
       {/* Mobile: stacks vertically (search full-width, sort full-width) */}
       {/* Tablet+: side-by-side row */}
       <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
@@ -254,7 +244,7 @@ export default function Products() {
         </div>
       </div>
 
-      {/* ── Category Filter Tabs ── */}
+      {/* Category Filter Tabs */}
       {/* Horizontally scrollable on mobile, wraps on larger screens */}
       <div
         className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide"
@@ -288,7 +278,7 @@ export default function Products() {
         })}
       </div>
 
-      {/* ── Results Count + Clear ── */}
+      {/* Results Count + Clear */}
       {!loading && !error && (
         <div className="flex items-center justify-between flex-wrap gap-2">
           <p className="text-sm" style={{ color: 'var(--text-2)' }}>
@@ -324,10 +314,10 @@ export default function Products() {
         </div>
       )}
 
-      {/* ── Loading Spinner ── */}
+      {/* Loading Spinner */}
       {loading && <LoadingSpinner text="Loading products…" />}
 
-      {/* ── Error State ── */}
+      {/* Error State */}
       {error && !loading && (
         <div className="flex flex-col items-center gap-3 py-14 text-center">
           <div
@@ -351,7 +341,7 @@ export default function Products() {
         </div>
       )}
 
-      {/* ── Empty State ── */}
+      {/* Empty State */}
       {!loading && !error && processed.length === 0 && (
         <div className="flex flex-col items-center py-16 gap-4 text-center">
           <div className="text-5xl">🔍</div>
@@ -375,7 +365,7 @@ export default function Products() {
         </div>
       )}
 
-      {/* ── Product Grid ── */}
+      {/* Product Grid */}
       {/* key=activeCategory forces re-mount → triggers fade-in animation on every category switch */}
       {/* 1 col mobile, 2 tablet, 3 lg, 4 xl */}
       {!loading && !error && paginated.length > 0 && (
@@ -389,7 +379,7 @@ export default function Products() {
         </div>
       )}
 
-      {/* ── Pagination ── */}
+      {/* Pagination */}
       {!loading && !error && totalPages > 1 && (
         <div className="flex items-center justify-center gap-1.5 sm:gap-2 pt-2 flex-wrap">
           {/* Previous page */}

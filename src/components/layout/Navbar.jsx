@@ -6,12 +6,6 @@ import { useTheme } from '../../context/ThemeContext';
 import { Link, useNavigate } from 'react-router-dom';
 import BasketLogo from '../ui/BasketLogo';
 
-/* ─── Navbar ───────────────────────────────────────────────────
-   Top navigation bar — fixed, sits above main content on all
-   screen sizes. Offset by sidebar width (lg:left-60).
-   Contains: hamburger (mobile), mobile logo, session timer,
-   cart pill, dark mode toggle, and user dropdown.
-──────────────────────────────────────────────────────────────── */
 export default function Navbar({ onMenuClick }) {
   const { user, sessionSeconds, formatTimer, logout } = useAuth();
   const { cartCount } = useCart();
@@ -21,9 +15,6 @@ export default function Navbar({ onMenuClick }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  /* ── Click-outside: close dropdown when user clicks anywhere outside ──
-     Using 'mousedown' so it fires BEFORE 'click', preventing the
-     race condition that caused double-click on trackpads with onBlur. */
   useEffect(() => {
     if (!dropdownOpen) return;
     const handler = (e) => {
@@ -63,7 +54,7 @@ export default function Navbar({ onMenuClick }) {
         boxShadow: '0 1px 8px rgba(0,0,0,0.04)'
       }}
     >
-      {/* ── Hamburger — mobile only ── */}
+      {/* Hamburger — mobile only */}
       <button
         onClick={onMenuClick}
         className="lg:hidden p-2 rounded-xl transition-colors shrink-0"
@@ -73,7 +64,7 @@ export default function Navbar({ onMenuClick }) {
         <Menu className="w-5 h-5" />
       </button>
 
-      {/* ── Mobile logo — hidden on desktop (sidebar shows logo) ── */}
+      {/* Mobile logo — hidden on desktop (sidebar shows logo) */}
       <Link
         to="/dashboard"
         className="flex items-center gap-2 lg:hidden shrink-0"
@@ -98,7 +89,7 @@ export default function Navbar({ onMenuClick }) {
       {/* Spacer — pushes right group to far right */}
       <div className="flex-1" />
 
-      {/* ── Right group ── */}
+      {/* Right group */}
       <div className="flex items-center gap-1 sm:gap-2 shrink-0">
         {/* Session timer — shows in red when < 5 min */}
         <div
@@ -134,7 +125,7 @@ export default function Navbar({ onMenuClick }) {
           </Link>
         )}
 
-        {/* ── Dark / Light mode toggle ── */}
+        {/* Dark / Light mode toggle */}
         <button
           onClick={toggleTheme}
           className="w-8 h-8 flex items-center justify-center rounded-xl transition-all hover:scale-105 shrink-0"
@@ -155,7 +146,7 @@ export default function Navbar({ onMenuClick }) {
           style={{ background: 'var(--border)' }}
         />
 
-        {/* ── User dropdown ── */}
+        {/* User dropdown */}
         {/* ref on the container so click-outside ignores clicks inside */}
         <div className="relative shrink-0" ref={dropdownRef}>
           <button

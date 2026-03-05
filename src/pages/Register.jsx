@@ -13,10 +13,6 @@ import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import BasketLogo from '../components/ui/BasketLogo';
 
-/* ─── Register Page ────────────────────────────────────────────
-   Full-screen dark glassmorphism registration form.
-   Shows a success toast after account creation.
-──────────────────────────────────────────────────────────────── */
 export default function Register() {
   const { register } = useAuth();
   const { showToast } = useToast();
@@ -33,7 +29,7 @@ export default function Register() {
     setErrors((p) => ({ ...p, [e.target.id]: '' }));
   };
 
-  /* ── Form Validation ── */
+  /* Form Validation */
   const validate = () => {
     const errs = {};
     if (!form.name.trim() || form.name.trim().length < 2)
@@ -44,7 +40,7 @@ export default function Register() {
     return errs;
   };
 
-  /* ── Form Submit — Create new account and show toast ── */
+  /* Form Submit — Create new account and show toast */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setGlobalError('');
@@ -87,7 +83,7 @@ export default function Register() {
           'linear-gradient(135deg, #0f172a 0%, #064e3b 50%, #0f172a 100%)'
       }}
     >
-      {/* ── Decorative Background Blobs ── */}
+      {/* Decorative Background Blobs */}
       <div
         className="fixed top-0 left-0 w-96 h-96 rounded-full pointer-events-none"
         style={{
@@ -114,7 +110,7 @@ export default function Register() {
       />
 
       <div className="w-full max-w-sm relative z-10">
-        {/* ── Brand Logo ── */}
+        {/* Brand Logo */}
         <div className="flex items-center justify-center gap-3 mb-5">
           <div
             className="w-11 h-11 rounded-xl flex items-center justify-center shadow-xl"
@@ -145,7 +141,7 @@ export default function Register() {
           </div>
         </div>
 
-        {/* ── Register Card ── */}
+        {/* Register Card */}
         <div
           className="rounded-3xl px-6 py-6"
           style={{
@@ -184,7 +180,7 @@ export default function Register() {
             </div>
           )}
 
-          {/* ── Register Form ── */}
+          {/* Register Form */}
           <form onSubmit={handleSubmit} className="flex flex-col gap-3.5">
             {/* Name Field */}
             <div className="flex flex-col gap-1.5">
@@ -338,7 +334,7 @@ export default function Register() {
           </form>
         </div>
 
-        {/* ── Footer Link ── */}
+        {/* Footer Link */}
         <p
           className="text-center text-sm mt-4"
           style={{ color: 'rgba(255,255,255,0.35)' }}

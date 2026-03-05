@@ -1,10 +1,5 @@
 import { createContext, useContext, useState, useCallback } from 'react';
 
-/* ─── Toast Context ───────────────────────────────────────────
-   Provides showToast(message, type) globally.
-   Types: 'success' | 'error' | 'info' | 'warning'
-   Auto-dismisses after 3 seconds.
-──────────────────────────────────────────────────────────────── */
 const ToastContext = createContext(null);
 
 export function ToastProvider({ children }) {

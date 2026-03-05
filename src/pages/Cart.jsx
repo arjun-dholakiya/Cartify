@@ -5,7 +5,7 @@ import { useToast } from '../context/ToastContext';
 import CartItem from '../components/cart/CartItem';
 import CartSummary from '../components/cart/CartSummary';
 
-/* ─── Empty Cart Illustration ── */
+/* Empty Cart Illustration */
 function EmptyCartIllustration() {
   return (
     <div className="flex flex-col items-center justify-center gap-6 py-16 sm:py-20 fade-in">
@@ -39,10 +39,6 @@ function EmptyCartIllustration() {
   );
 }
 
-/* ─── Cart Page ────────────────────────────────────────────────
-   Shows all cart items and an order summary panel.
-   Responsive: items stack above summary on mobile.
-──────────────────────────────────────────────────────────────── */
 export default function Cart() {
   const { items, clearCart } = useCart();
   const { showToast } = useToast();
@@ -60,7 +56,7 @@ export default function Cart() {
 
   return (
     <div className="flex flex-col gap-5 sm:gap-6 fade-in">
-      {/* ── Cart Header ── */}
+      {/* Cart Header */}
       <div className="flex items-center justify-between">
         <div>
           <h1
@@ -82,7 +78,7 @@ export default function Cart() {
         </button>
       </div>
 
-      {/* ── Cart Layout: Items + Summary ── */}
+      {/* Cart Layout: Items + Summary */}
       {/* Stacks vertically on mobile, row on desktop */}
       <div className="flex flex-col lg:flex-row gap-4 sm:gap-5 items-start">
         {/* Cart Items List */}
@@ -101,7 +97,7 @@ export default function Cart() {
           </Link>
         </div>
 
-        {/* ── Order Summary Panel ── */}
+        {/* Order Summary Panel */}
         <div className="w-full lg:w-80 shrink-0">
           <CartSummary />
         </div>

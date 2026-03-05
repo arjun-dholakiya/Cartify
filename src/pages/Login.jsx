@@ -5,10 +5,6 @@ import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import BasketLogo from '../components/ui/BasketLogo';
 
-/* ─── Login Page ───────────────────────────────────────────────
-   Full-screen dark glassmorphism login form.
-   Shows a welcome toast on successful authentication.
-──────────────────────────────────────────────────────────────── */
 export default function Login() {
   const { login } = useAuth();
   const { showToast } = useToast();
@@ -22,7 +18,7 @@ export default function Login() {
   const handleChange = (e) =>
     setForm((p) => ({ ...p, [e.target.id]: e.target.value }));
 
-  /* ── Form Submit — Authenticate user ── */
+  /* Form Submit — Authenticate user */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -57,7 +53,7 @@ export default function Login() {
           'linear-gradient(135deg, #0f172a 0%, #064e3b 50%, #0f172a 100%)'
       }}
     >
-      {/* ── Decorative Background Blobs ── */}
+      {/* Decorative Background Blobs */}
       <div
         className="fixed top-0 left-0 w-96 h-96 rounded-full pointer-events-none"
         style={{
@@ -76,7 +72,7 @@ export default function Login() {
       />
 
       <div className="w-full max-w-sm relative z-10">
-        {/* ── Brand Logo ── */}
+        {/* Brand Logo */}
         <div className="flex items-center justify-center gap-3 mb-5">
           <div
             className="w-11 h-11 rounded-xl flex items-center justify-center shadow-xl"
@@ -107,7 +103,7 @@ export default function Login() {
           </div>
         </div>
 
-        {/* ── Login Card ── */}
+        {/* Login Card */}
         <div
           className="rounded-3xl px-6 py-6"
           style={{
@@ -280,7 +276,7 @@ export default function Login() {
           </form>
         </div>
 
-        {/* ── Footer Link ── */}
+        {/* Footer Link */}
         <p
           className="text-center text-sm mt-4"
           style={{ color: 'rgba(255,255,255,0.35)' }}
