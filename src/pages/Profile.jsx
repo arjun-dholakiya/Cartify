@@ -289,7 +289,7 @@ export default function Profile() {
                 placeholder="New password"
                 value={form.password}
                 onChange={handleChange}
-                className={`input-field dark-input pr-11 ${
+                className={`input-field pr-11 ${
                   errors.password ? 'border-red-400' : ''
                 }`}
                 style={{ paddingLeft: '2.5rem' }}
