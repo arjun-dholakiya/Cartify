@@ -49,25 +49,38 @@ export default function Profile() {
   /* Form Submit — Save profile and show toast */
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const errs = validate();
+
     if (Object.keys(errs).length) {
       setErrors(errs);
       return;
     }
+
     setLoading(true);
+
     try {
       await new Promise((r) => setTimeout(r, 700));
+
       const updates = {
         name: form.name.trim(),
         email: form.email.trim(),
         avatar
       };
+
       if (form.password) updates.password = form.password;
+
       updateProfile(updates);
+
       setForm((p) => ({ ...p, password: '' }));
 
-      /* Toast replaces the in-page success banner */
       showToast('Profile updated successfully! ✅', 'success');
+    } catch (err) {
+      if (err.code === 'EMAIL_ALREADY_EXISTS') {
+        showToast('This email is already used by another account.', 'error');
+      } else {
+        showToast('Failed to update profile.', 'error');
+      }
     } finally {
       setLoading(false);
     }

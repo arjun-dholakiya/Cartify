@@ -53,7 +53,6 @@ export function AuthProvider({ children }) {
   const login = useCallback((email, password) => {
     const users = JSON.parse(localStorage.getItem('cartify_users') || '[]');
 
-    /* Step 1: check if the email is registered at all */
     const emailMatch = users.find((u) => u.email === email);
 
     if (!emailMatch) {
@@ -64,7 +63,6 @@ export function AuthProvider({ children }) {
       throw err;
     }
 
-    /* Step 2: email exists — now check password */
     if (emailMatch.password !== password) {
       const err = new Error('Incorrect password. Please try again.');
       err.code = 'WRONG_PASSWORD';
@@ -125,11 +123,27 @@ export function AuthProvider({ children }) {
     setSessionSeconds(0);
   }, []);
 
+  /* FIXED PROFILE UPDATE WITH EMAIL VALIDATION */
   const updateProfile = useCallback(
     (updates) => {
       if (!user) return;
 
       const users = JSON.parse(localStorage.getItem('cartify_users') || '[]');
+
+      /* Check if another user already has this email */
+      if (updates.email) {
+        const emailExists = users.find(
+          (u) => u.email === updates.email && u.id !== user.id
+        );
+
+        if (emailExists) {
+          const err = new Error(
+            'This email is already registered with another account.'
+          );
+          err.code = 'EMAIL_ALREADY_EXISTS';
+          throw err;
+        }
+      }
 
       const idx = users.findIndex((u) => u.id === user.id);
 
@@ -139,11 +153,9 @@ export function AuthProvider({ children }) {
       }
 
       const updatedUser = { ...user, ...updates };
-
       delete updatedUser.password;
 
       localStorage.setItem('cartify_user', JSON.stringify(updatedUser));
-
       setUser(updatedUser);
     },
     [user]
