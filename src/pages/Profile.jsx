@@ -283,12 +283,15 @@ export default function Profile() {
                 style={{ color: 'var(--text-3)' }}
               />
               <input
+                autoComplete="off"
                 id="password"
                 type={showPass ? 'text' : 'password'}
                 placeholder="New password"
                 value={form.password}
                 onChange={handleChange}
-                className={`input-field pr-11 ${errors.password ? 'border-red-400' : ''}`}
+                className={`input-field dark-input pr-11 ${
+                  errors.password ? 'border-red-400' : ''
+                }`}
                 style={{ paddingLeft: '2.5rem' }}
               />
               <button
